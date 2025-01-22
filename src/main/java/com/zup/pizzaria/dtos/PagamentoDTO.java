@@ -1,29 +1,28 @@
-package com.zup.pizzaria.models;
+package com.zup.pizzaria.dtos;
 
-
-import jakarta.persistence.*;
+import com.zup.pizzaria.models.FormaPagamento;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
-@Entity
-public class Pagamento {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @ManyToOne
+public class PagamentoDTO {
+
     private Long pedidoId;
+    @Enumerated(EnumType.STRING)
     private FormaPagamento formaPagamento;
-    private Double valorPago;
+    private double valorPago;
     private LocalDateTime dataHoraPagamento;
 
-    public Long getId(){
-        return id;
-    }
-    public void setID(Long id){
-        this.id = id;
+    public PagamentoDTO(Long pedidoId, FormaPagamento formaPagamento, double valorPago, LocalDateTime dataHoraPagamento) {
+        this.pedidoId = pedidoId;
+        this.formaPagamento = formaPagamento;
+        this.valorPago = valorPago;
+        this.dataHoraPagamento = dataHoraPagamento;
     }
 
-    public Long getPedidoId(){
+    public Long getPedidoId() {
         return pedidoId;
     }
 
@@ -39,11 +38,11 @@ public class Pagamento {
         this.formaPagamento = formaPagamento;
     }
 
-    public Double getValorPago() {
+    public double getValorPago() {
         return valorPago;
     }
 
-    public void setValorPago(Double valorPago) {
+    public void setValorPago(double valorPago) {
         this.valorPago = valorPago;
     }
 
@@ -53,13 +52,5 @@ public class Pagamento {
 
     public void setDataHoraPagamento(LocalDateTime dataHoraPagamento) {
         this.dataHoraPagamento = LocalDateTime.now();
-    }
-
-    public Pagamento(Long id, Long pedidoId, FormaPagamento formaPagamento, Double valorPago, LocalDateTime dataHoraPagamento) {
-        this.id = id;
-        this.pedidoId = pedidoId;
-        this.formaPagamento = formaPagamento;
-        this.valorPago = valorPago;
-        this.dataHoraPagamento = dataHoraPagamento;
     }
 }
